@@ -297,9 +297,8 @@ st.markdown(
 )
 
 
-# MODEL YOLLARI
+# MODEL YOLU
 MODEL_PATH = "best_densenet121.keras"
-TRAIN_DIR  = "data/train"
 
 # MODEL DRIVE'DAN İNDİR
 import gdown
@@ -320,21 +319,16 @@ def load_model():
 model = load_model()
 
 
-# SINIF İSİMLERİ
-@st.cache_data
-def load_class_names(train_dir):
-    raw_classes = [
-        d for d in os.listdir(train_dir)
-        if os.path.isdir(os.path.join(train_dir, d))
-    ]
-    return sorted(raw_classes)
-
-CLASS_NAMES = load_class_names(TRAIN_DIR)
+# SINIF İSİMLERİ (sabit liste)
+CLASS_NAMES = [
+    "Acral_Lentiginous_Melanoma",
+    "blue_finger",
+    "clubbing",
+    "healthy",
+    "pitting",
+    "psoriasis"
+]
 CLASS_NAMES_LOWER = [c.lower() for c in CLASS_NAMES]
-
-if "healthy" not in CLASS_NAMES_LOWER:
-    st.error(T["healthy_not_found"])
-    st.stop()
 
 
 # SİSTEMİK RİSKLER
